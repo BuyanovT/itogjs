@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задания</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Создать HTML-страницу, которая выводит коэффициент Ваших интеллектуальных способностей I(l) на текущий день, используя формулу 
+
+            I=cos(l)/l^2,
+            где l - количество дней, прошедших от Вашего рождения. </h1>
+           <p>Введите вашу дату рождения:</p>
+           <input type="date" id="birthDate">
+           <button onclick="calculateIQ()">Рассчитать</button>
+           <p>Ваш коэффициент: <span id="iqValue">---</span></p>
+    </div>
+    <script>
+        function calculateIQ() {
+            let birthDate = document.getElementById('birthDate').value;
+            if (!birthDate) {
+                alert('Введите дату рождения!');
+                return;
+            }
+            let birthDateObj = new Date(birthDate);
+            let currentDate = new Date();
+            let daysLived = Math.floor((currentDate - birthDateObj) / (1000 * 60 * 60 * 24));
+
+            if (daysLived <= 0) {
+                alert('Дата рождения не может быть в будущем!');
+                return;
+            }
+            let iq = Math.cos(daysLived) / (daysLived ** 2);
+            document.getElementById('iqValue').textContent = iq.toFixed(6);
+        }
+    </script>
+</body>
+</html>

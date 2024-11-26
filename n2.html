@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задания</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Написать функцию, которая проверяет, что в строке, переданной в качестве аргумента, передается дробное число (десятичная дробь) в диапазоне от 0 до 1000. Если это так, то функция должна вернуть True, в противном случае - False. </h1>
+        <p>Введите число:</p>
+        <input type="text" id="numberInput" placeholder="Введите дробное число">
+        <button onclick="checkFraction()">Проверить</button>
+        <p>Результат: <span id="result">---</span></p>
+    </div>
+    <script>
+        function checkFraction() {
+            let input = document.getElementById('numberInput').value.trim();
+            let isValid = isFractionInRange(input);
+            document.getElementById('result').textContent = isValid ? 'True' : 'False';
+        }
+        function isFractionInRange(value) {
+            let number = parseFloat(value); 
+            if (!isNaN(number) && value.includes('.') && number > 0 && number < 1000) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

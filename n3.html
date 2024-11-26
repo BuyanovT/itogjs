@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задания</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1> Сделайте страницу с несколькими (не менее пяти) одностроковыми полями для ввода текста и кнопкой submit. В эти поля будут вводиться адреса электронной почты. 
+            У формы должно обрабатываться событие submit. Обработка состоит в следующем: 
+            если форма заполнена правильно (все поля заполнены и во всех стоят адреса вида ???@???????, где знак "?" может быть любой латинской буквой, точкой, минусом или подчерком); 
+            удалить все пробелы; 
+            выдать сообщение, что все в порядке (alert); 
+            если форма заполнена неправильно 
+            выдать сообщение об ошибке; 
+            установить курсор в первое ошибочное поле. 
+            </h1>
+        <p>Введите адреса электронной почты:</p>
+        
+        <form id="emailForm">
+            <label>Адрес 1: <input type="text" name="email"></label>
+            <label>Адрес 2: <input type="text" name="email"></label>
+            <label>Адрес 3: <input type="text" name="email"></label>
+            <label>Адрес 4: <input type="text" name="email"></label>
+            <label>Адрес 5: <input type="text" name="email"></label>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("emailForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let inputs = document.querySelectorAll("input[name='email']");
+            let isValid = true;
+            let firstErrorField = null;
+            for (let input of inputs) {
+                input.value = input.value.trim(); 
+                let email = input.value;
+                let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+                if (!email || !emailRegex.test(email)) {
+                    isValid = false;
+                    if (!firstErrorField) firstErrorField = input;  
+                }
+            }
+            if (isValid) {
+                alert("Все в порядке! Все поля заполнены правильно.");
+            } else {
+                alert("Ошибка: заполните все поля корректно.");
+                firstErrorField.focus(); 
+            }
+        });
+    </script>
+</body>
+</html>
